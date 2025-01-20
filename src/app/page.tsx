@@ -1,101 +1,99 @@
+"use client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+type MovieType = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  populatity: number;
+  poster_path: string;
+  release_date: number;
+  title: string;
+  vidio: boolean;
+  vote_average: number;
+  vote_count: number;
+};
+// type kino = {};
+// const kino = {
+//   adult: false,
+//   backdrop_path: "/rDa3SfEijeRNCWtHQZCwfbGxYvR.jpg",
+//   genre_ids: [28, 12, 53],
+//   id: 539972,
+//   original_language: "en",
+//   original_title: "Kraven the Hunter",
+//   overview:
+//     "Kraven Kravinoff's complex relationship with his ruthless gangster father, Nikolai, starts him down a path of vengeance with brutal consequences, motivating him to become not only the greatest hunter in the world, but also one of its most feared.",
+//   popularity: 3297.244,
+//   poster_path: "/i47IUSsN126K11JUzqQIOi1Mg1M.jpg",
+//   release_date: "2024-12-11",
+//   title: "Kraven the Hunter",
+//   video: false,
+//   vote_average: 6.421,
+//   vote_count: 596,
+// };
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [movies, setMovies] = useState<MovieType[] | undefined>();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  ///frech move medeelel setmovie
+  const token =
+    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZDVjNjBlOTdmYzQxNDVkNGIzZDlhMjk0NjVmZmEzZCIsIm5iZiI6MTczNzM0MjQxMi43MjUsInN1YiI6IjY3OGRiZGNjZTQ1NjYzOTlhMjZlMWEzZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Qig5T_JxICE_KQE6jl2ivbla8UZdUGdSJvm2xW-86NQ";
+  const getMovie = async () => {
+    const response = await fetch(
+      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+
+    if (data?.results) {
+      setMovies(data.results);
+    }
+  };
+  useEffect(() => {
+    getMovie();
+    console.log("getting movie");
+  }, []);
+  // console.log({ movie });
+  return (
+    <div className="w-full] h-[900px] flex flex-col items-center justify-center gap-8 font-black">
+      {movies?.map((movie, index) => {
+        return (
+          <div key={index}>
+            <div className="w-[500px] h-[500px] flex flex-col gap-3">
+              <div>
+                <img
+                  className="w-[50px] h-[50px]"
+                  src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
+                  alt=""
+                />
+                <h2>{movie?.original_title}</h2>
+              </div>
+              {/* <p> adult{movies?.adult}</p>
+              <p> backdrop_path{movies?.backdrop_path}</p>
+              <p>genre_ids{movies?.genre_ids}</p>
+              <p> id{movies?.id}</p>
+              <p> original_language{movies?.original_language}</p>
+              <p>original_title{movies?.original_title}</p>
+              <p> overview{movies?.populatity}</p>
+              <p> populatity{movies?.release_date}</p>
+              <p> vidio{movies?.vidio}</p> */}
+
+              {/* <p>vote_count{movies?.vote_count}</p> */}
+              <p> {movie?.vote_average}</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
