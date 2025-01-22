@@ -18,10 +18,13 @@ export default async function CartsPopular() {
     return (Math.floor(vote * 10) / 10).toString().replace(".", ",");
   }
   return (
-    <div className="flex items-start content-start  flex-wrap  gap-x-8 gap-y-8 px-12">
-      {data.results?.slice(0, 10).map((movie: MovieType) => {
+    <div className="max-w-[1280px] flex m-auto flex-wrap gap-[32px] mb-[32px]">
+      {data.results?.slice(0, 10).map((movie: MovieType, index: number) => {
         return (
-          <div className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 ">
+          <div
+            key={index}
+            className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
+          >
             <div className="">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}

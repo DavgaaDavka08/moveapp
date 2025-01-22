@@ -19,10 +19,13 @@ export default async function CardsTopRated() {
   console.log(data);
 
   return (
-    <div className="flex items-start content-start  flex-wrap  gap-x-8 gap-y-8 px-12">
-      {data.results?.slice(0, 10).map((movie: MovieTopRated) => {
+    <div className="max-w-[1280px] flex m-auto flex-wrap gap-[32px]">
+      {data.results?.slice(0, 10).map((movie: MovieTopRated, index: number) => {
         return (
-          <div className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 ">
+          <div
+            key={index}
+            className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
+          >
             <div className="">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}

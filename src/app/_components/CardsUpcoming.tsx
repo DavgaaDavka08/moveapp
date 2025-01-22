@@ -18,29 +18,34 @@ export default async function CardsUpcoming() {
   const data = await response.json();
   console.log(data);
   return (
-    <div className="flex items-start content-start gap-x-8 gap-y-8 flex-wrap  px-12">
-      {data.results?.slice(0, 10).map((movieup: MovieTypeUpcoming) => {
-        return (
-          <div className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 ">
-            <Image
-              src={`https://image.tmdb.org/t/p/w500${movieup?.poster_path}`}
-              width={229.73}
-              height={340}
-              alt=""
-            />
-            <div>
-              <div className="flex">
-                <img src="star.svg" alt="" />
-                <p>{formatVoteAverage(movieup.vote_average)}</p>
-                <p>/10</p>
-              </div>
+    <div className="max-w-[1280px] flex m-auto flex-wrap gap-[32px] mb-[32px]">
+      {data.results
+        ?.slice(0, 10)
+        .map((movieup: MovieTypeUpcoming, index: number) => {
+          return (
+            <div
+              key={index}
+              className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
+            >
+              <Image
+                src={`https://image.tmdb.org/t/p/w500${movieup?.poster_path}`}
+                width={229.73}
+                height={340}
+                alt=""
+              />
               <div>
-                <h2>{movieup.original_title}</h2>
+                <div className="flex">
+                  <img src="star.svg" alt="" />
+                  <p>{formatVoteAverage(movieup.vote_average)}</p>
+                  <p>/10</p>
+                </div>
+                <div>
+                  <h2>{movieup.original_title}</h2>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   );
 }
