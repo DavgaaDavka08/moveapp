@@ -14,20 +14,28 @@ export default async function CartsPopular() {
   );
   const data = await response.json();
   console.log(data);
+  function formatVoteAverage(vote: number) {
+    return (Math.floor(vote * 10) / 10).toString().replace(".", ",");
+  }
   return (
-    <div className="flex items-start content-start gap-8 flex-wrap bg-gray-300">
-      {data.results?.map((movie: MovieType) => {
+    <div className="flex items-start content-start  flex-wrap  gap-x-8 gap-y-8 px-12">
+      {data.results?.slice(0, 10).map((movie: MovieType) => {
         return (
-          <div className="w-[229.73px] h-[340]px flex flex-col p-2 items-start">
+          <div className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 ">
             <div className="">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
-                width={100}
-                height={100}
+                width={229.73}
+                height={340}
                 alt=""
               />
-              <p> Hello: {movie.original_title}</p>
-              <p>{movie.title}</p>
+              <div className="flex">
+                <img src="star.svg" alt="" />
+
+                <p>{formatVoteAverage(movie.vote_average)}</p>
+                <p>/10</p>
+              </div>
+              <h2>{movie.original_title}</h2>
             </div>
           </div>
         );

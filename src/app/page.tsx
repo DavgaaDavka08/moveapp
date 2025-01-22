@@ -4,7 +4,7 @@ import CardsUpcoming from "./_components/CardsUpcoming";
 import CardsTopTated from "./_components/CardsTopRated";
 export default async function Home() {
   return (
-    <div className="w-[100vh] h-[4184px] m-auto  items-start content-start gap-8 flex-wrap">
+    <div className="flex flex-col  gap-x-8 gap-y-8">
       <CardsUpcoming />
       <CartsPopular />
       <CardsTopTated />
