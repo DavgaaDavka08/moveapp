@@ -9,7 +9,6 @@ import Header from "./_components/Header";
 export default async function Home() {
   return (
     <div>
-      <Header />
       <Feature />
       <SeeMore1 />
       <CardsUpcoming />

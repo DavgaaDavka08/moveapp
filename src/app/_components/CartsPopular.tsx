@@ -1,5 +1,6 @@
 import { TOKEN } from "@/util/constant";
 import { MovieType } from "@/util/MovieType";
+import { Key } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 export default async function CartsPopular() {
@@ -21,26 +22,28 @@ export default async function CartsPopular() {
     <div className="max-w-[1280px] flex m-auto flex-wrap gap-[32px] mb-[32px]">
       {data.results?.slice(0, 10).map((movie: MovieType, index: number) => {
         return (
-          <div
-            key={index}
-            className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
-          >
-            <div className="">
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
-                width={229.73}
-                height={340}
-                alt=""
-              />
-              <div className="flex">
-                <img src="star.svg" alt="" />
+          <Link href={`/catagory/${movie.id}`} key={index}>
+            <div
+              key={index}
+              className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
+            >
+              <div className="">
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+                  width={229.73}
+                  height={340}
+                  alt=""
+                />
+                <div className="flex">
+                  <img src="star.svg" alt="" />
 
-                <p>{formatVoteAverage(movie.vote_average)}</p>
-                <p>/10</p>
+                  <p>{formatVoteAverage(movie.vote_average)}</p>
+                  <p>/10</p>
+                </div>
+                <h2>{movie.original_title}</h2>
               </div>
-              <h2>{movie.original_title}</h2>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>
