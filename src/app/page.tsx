@@ -3,12 +3,13 @@ import CartsPopular from "./_components/CartsPopular";
 import CardsUpcoming from "./_components/CardsUpcoming";
 import CardsTopTated from "./_components/CardsTopRated";
 import { SeeMore1, SeeMore2, SeeMore3 } from "./_components/SeeMore";
-import { ModeToggle } from "@/components/theme-toggle";
 import Feature from "./_components/Feature";
+import { Footer } from "./_components/Footer";
+import Header from "./_components/Header";
 export default async function Home() {
   return (
     <div>
-      <ModeToggle />
+      <Header />
       <Feature />
       <SeeMore1 />
       <CardsUpcoming />
@@ -16,6 +17,7 @@ export default async function Home() {
       <CartsPopular />
       <SeeMore3 />
       <CardsTopTated />
+      <Footer />
     </div>
   );
 }

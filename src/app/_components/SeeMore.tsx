@@ -7,7 +7,7 @@ export const SeeMore1 = () => {
         <h3 className="text-foreground text-2xl font-semibold">Upcoming</h3>
       </div>
       <div>
-        <Link href={"categor"}>SeeMore</Link>
+        <Link href={"/hamaagui/1"}>SeeMore</Link>
       </div>
     </div>
   );
@@ -19,7 +19,7 @@ export const SeeMore2 = () => {
         <h3 className="text-foreground text-2xl font-semibold">Upcoming</h3>
       </div>
       <div>
-        <Link href={"categor"}>SeeMore</Link>
+        <Link href={"/hamaagui/2"}>SeeMore</Link>
       </div>
     </div>
   );
@@ -31,7 +31,7 @@ export const SeeMore3 = () => {
         <h3 className="text-foreground text-2xl font-semibold">Upcoming</h3>
       </div>
       <div>
-        <Link href={"categor"}>SeeMore</Link>
+        <Link href={"/hamaagui/2"}>SeeMore</Link>
       </div>
     </div>
   );

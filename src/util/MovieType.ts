@@ -16,3 +16,13 @@ export type MovieTopRated = {
   poster_path: boolean;
   vote_average: number;
 };
+export type MovieNowPlayng = {
+  overview: string; // taniltsuulga
+  original_title: string;
+  poster_path: boolean;
+  vote_average: number;
+};
+export type MovieSelectGanre = {
+  name: string;
+  id: number;
+};

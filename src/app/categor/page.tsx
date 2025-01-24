@@ -9,6 +9,7 @@ export const page = () => {
       <DropdownMenu />
       <Link href={"/"}>hjkerh</Link>
       <ModeToggle />
+      <h1>baaska shadow</h1>
     </div>
   );
 };
