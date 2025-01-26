@@ -10,11 +10,11 @@ export default async function Home() {
   return (
     <div>
       <Feature />
-      <SeeMore1 />
+
       <CardsUpcoming />
-      <SeeMore2 />
+
       <CartsPopular />
-      <SeeMore3 />
+
       <CardsTopTated />
       <Footer />
     </div>

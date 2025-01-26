@@ -1,10 +1,9 @@
 import { TOKEN } from "@/util/constant";
 import { MovieTopRated } from "@/util/MovieType";
 import Image from "next/image";
-import { SeeMore3 } from "./SeeMore";
 import Link from "next/link";
 
-export default async function CardsTopRated() {
+export default async function page1() {
   const response = await fetch(
     "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
     {
@@ -22,7 +21,6 @@ export default async function CardsTopRated() {
 
   return (
     <div className="max-w-[1280px] flex m-auto flex-wrap gap-[32px]">
-      <SeeMore3 />
       {data.results?.slice(0, 10).map((movie: MovieTopRated, index: number) => {
         return (
           <Link href={`/catagory/${movie.id}`} key={index}>

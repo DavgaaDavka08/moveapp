@@ -1,6 +1,12 @@
 import { ButtonDemo } from "@/components/ui/my-button";
 import { TOKEN } from "@/util/constant";
-import { MovieSelectGanre, MovieStar, MovieTrailer } from "@/util/MovieType";
+import {
+  MovieNowPlayng,
+  MovieSelectGanre,
+  MovieStar,
+  MovieTrailer,
+} from "@/util/MovieType";
+import Image from "next/image";
 export default async function page1({
   params: { movieId },
 }: {
@@ -33,7 +39,19 @@ export default async function page1({
       },
     }
   );
+  ///
+  const responseSimilar = await fetch(
+    ` https://api.themoviedb.org/3/movie/${movieId}/similar?language=en-US&page=1`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const dataSimilar = await responseSimilar.json();
 
+  console.log(dataSimilar);
   const dataTrailer = await responseTrailer.json();
 
   console.log(dataTrailer);
@@ -87,20 +105,7 @@ export default async function page1({
               backgroundRepeat: "no-repeat",
             }}
           >
-            <div className="relative top-[300px] left-[100px]">
-              <video
-                src={
-                  "https://image.tmdb.org/t/p/w500" + dataTrailer.poster_path
-                }
-              >
-                gfdgtdgfjhf
-              </video>
-              {/* {dataTrailer.results?.map(
-                (trailer: MovieTrailer, index: number) => {
-                  return <div key={index}></div>;
-                }
-              )} */}
-            </div>
+            <div className="relative top-[300px] left-[100px]"></div>
           </div>
         </div>
       </div>
@@ -116,7 +121,6 @@ export default async function page1({
             );
           })}
         </div>
-
         <p>{data.overview}</p>
         <div className="flex items-center gap-[53px]">
           <h1 className="text-[#FAFAFA] font-inter text-[16px] font-bold leading-[28px] w-64px">
@@ -153,6 +157,31 @@ export default async function page1({
           })}
         </div>
       </div>
+      {dataSimilar.results
+        ?.slice(0, 5)
+        .map((movie: MovieNowPlayng, index: number) => {
+          return (
+            <div
+              key={index}
+              className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
+            >
+              <div className="">
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+                  width={229.73}
+                  height={340}
+                  alt=""
+                />
+                <div className="flex">
+                  <img src="star.svg" alt="" />
+                  <p>{formatVoteAverage(movie.vote_average)}</p>
+                  <p>/10</p>
+                </div>
+                <h2>{movie.original_title}</h2>
+              </div>
+            </div>
+          );
+        })}
     </div>
   );
 }

@@ -1,12 +1,11 @@
 import { TOKEN } from "@/util/constant";
-import { MovieTopRated } from "@/util/MovieType";
+import { MovieType } from "@/util/MovieType";
 import Image from "next/image";
-import { SeeMore3 } from "./SeeMore";
 import Link from "next/link";
 
-export default async function CardsTopRated() {
+export default async function page2() {
   const response = await fetch(
-    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+    "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -14,16 +13,14 @@ export default async function CardsTopRated() {
       },
     }
   );
+  const data = await response.json();
+  console.log(data);
   function formatVoteAverage(vote: number) {
     return (Math.floor(vote * 10) / 10).toString().replace(".", ",");
   }
-  const data = await response.json();
-  console.log(data);
-
   return (
-    <div className="max-w-[1280px] flex m-auto flex-wrap gap-[32px]">
-      <SeeMore3 />
-      {data.results?.slice(0, 10).map((movie: MovieTopRated, index: number) => {
+    <div className="max-w-[1280px] flex m-auto flex-wrap gap-[32px] mb-[32px]">
+      {data.results?.slice(0, 10).map((movie: MovieType, index: number) => {
         return (
           <Link href={`/catagory/${movie.id}`} key={index}>
             <div
@@ -39,6 +36,7 @@ export default async function CardsTopRated() {
                 />
                 <div className="flex">
                   <img src="star.svg" alt="" />
+
                   <p>{formatVoteAverage(movie.vote_average)}</p>
                   <p>/10</p>
                 </div>

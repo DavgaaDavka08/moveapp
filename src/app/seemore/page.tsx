@@ -1,10 +1,9 @@
 import { TOKEN } from "@/util/constant";
 import { MovieTypeUpcoming } from "@/util/MovieType";
 import Image from "next/image";
-import { SeeMore1 } from "./SeeMore";
 import Link from "next/link";
 
-export default async function CardsUpcoming() {
+export default async function page1() {
   const response = await fetch(
     " https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
     {
@@ -21,7 +20,6 @@ export default async function CardsUpcoming() {
   console.log(data);
   return (
     <div className="max-w-[1280px] flex m-auto flex-wrap gap-[32px] mb-[32px]">
-      <SeeMore1 />
       {data.results
         ?.slice(0, 10)
         .map((movieup: MovieTypeUpcoming, index: number) => {
