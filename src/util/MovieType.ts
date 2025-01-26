@@ -37,3 +37,12 @@ export type MovieStar = {
   genres: string;
   department: string;
 };
+export type MovieTrailer = {
+  name: string;
+  id: number;
+  genres: string;
+  department: string;
+  site: string;
+  Clip: VideoFrameInit;
+  official: boolean;
+};
