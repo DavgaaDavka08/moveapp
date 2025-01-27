@@ -18,6 +18,7 @@ export type MovieTopRated = {
   poster_path: boolean;
   vote_average: number;
   id: number;
+  release_date: number;
 };
 export type MovieNowPlayng = {
   overview: string; // taniltsuulga

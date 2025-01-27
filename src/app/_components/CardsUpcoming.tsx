@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default async function CardsUpcoming() {
   const response = await fetch(
-    " https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+    `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1`,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -19,6 +19,7 @@ export default async function CardsUpcoming() {
   }
   const data = await response.json();
   console.log(data);
+
   return (
     <div className="max-w-[1280px] flex m-auto flex-wrap gap-[32px] mb-[32px]">
       <SeeMore1 />

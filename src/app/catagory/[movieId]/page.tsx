@@ -7,6 +7,7 @@ import {
   MovieTrailer,
 } from "@/util/MovieType";
 import Image from "next/image";
+import Link from "next/link";
 export default async function page1({
   params: { movieId },
 }: {
@@ -161,25 +162,27 @@ export default async function page1({
         ?.slice(0, 5)
         .map((movie: MovieNowPlayng, index: number) => {
           return (
-            <div
-              key={index}
-              className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
-            >
-              <div className="">
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
-                  width={229.73}
-                  height={340}
-                  alt=""
-                />
-                <div className="flex">
-                  <img src="star.svg" alt="" />
-                  <p>{formatVoteAverage(movie.vote_average)}</p>
-                  <p>/10</p>
+            <Link href={`catagory/${movie.id}`}>
+              <div
+                key={index}
+                className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
+              >
+                <div className="">
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+                    width={229.73}
+                    height={340}
+                    alt=""
+                  />
+                  <div className="flex">
+                    <img src="star.svg" alt="" />
+                    <p>{formatVoteAverage(movie.vote_average)}</p>
+                    <p>/10</p>
+                  </div>
+                  <h2>{movie.original_title}</h2>
                 </div>
-                <h2>{movie.original_title}</h2>
               </div>
-            </div>
+            </Link>
           );
         })}
     </div>

@@ -24,7 +24,7 @@ export default async function CartsPopular() {
       <SeeMore2 />
       {data.results?.slice(0, 10).map((movie: MovieType, index: number) => {
         return (
-          <Link href={`/catagory/${movie.id}`} key={index}>
+          <Link href={`catagory/${movie.id}`} key={index}>
             <div
               key={index}
               className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "

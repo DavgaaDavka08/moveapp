@@ -1,6 +1,7 @@
 import { PopoverDemo } from "@/components/popoverimport";
 import { ModeToggle } from "@/components/theme-toggle";
 import { InputDemo } from "@/components/ui/hederinput";
+import SearchInput from "./IputData";
 
 export default async function Header() {
   return (
@@ -11,7 +12,7 @@ export default async function Header() {
       </div>
       <div className="flex gap-3 items-center">
         <PopoverDemo />
-        <InputDemo />
+        <SearchInput />
       </div>
       <div>
         <ModeToggle />
