@@ -46,4 +46,8 @@ export type MovieTrailer = {
   site: string;
   Clip: VideoFrameInit;
   official: boolean;
+  overview: string;
+  title: string;
+  original_title: string;
+  release_date: number;
 };

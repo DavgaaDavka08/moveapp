@@ -162,7 +162,7 @@ export default async function page1({
         ?.slice(0, 5)
         .map((movie: MovieNowPlayng, index: number) => {
           return (
-            <Link href={`catagory/${movie.id}`}>
+            <Link href={`/catagory/${movie.id}`}>
               <div
                 key={index}
                 className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "

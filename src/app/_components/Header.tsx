@@ -1,7 +1,7 @@
-import { PopoverDemo } from "@/components/popoverimport";
 import { ModeToggle } from "@/components/theme-toggle";
 import { InputDemo } from "@/components/ui/hederinput";
 import SearchInput from "./IputData";
+import PopoverDemo from "@/components/popoverimport";
 
 export default async function Header() {
   return (
