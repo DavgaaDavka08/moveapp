@@ -158,16 +158,29 @@ export default async function page1({
           })}
         </div>
       </div>
-      {dataSimilar.results
-        ?.slice(0, 5)
-        .map((movie: MovieNowPlayng, index: number) => {
+      <div>
+        {dataSimilar.results.slice(0, 1).map((movie: MovieSelectGanre) => {
           return (
-            <Link href={`/catagory/${movie.id}`}>
-              <div
-                key={index}
-                className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
-              >
-                <div className="">
+            <div className="w-[1280px] h-[36px] flex items-center justify-between m-auto">
+              <div>
+                <h3 className="text-foreground text-2xl font-semibold">
+                  More Like This
+                </h3>
+              </div>
+              <div>
+                <Link href={`/similar/${movie.id}`}>SeeMore</Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex">
+        {dataSimilar.results
+          ?.slice(0, 5)
+          .map((movie: MovieNowPlayng, index: number) => {
+            return (
+              <Link href={`/catagory/${movie.id}`}>
+                <div key={index}>
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
                     width={229.73}
@@ -181,10 +194,10 @@ export default async function page1({
                   </div>
                   <h2>{movie.original_title}</h2>
                 </div>
-              </div>
-            </Link>
-          );
-        })}
+              </Link>
+            );
+          })}
+      </div>
     </div>
   );
 }

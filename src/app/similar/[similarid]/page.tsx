@@ -1,0 +1,61 @@
+import { TOKEN } from "@/util/constant";
+import { MovieTypeUpcoming } from "@/util/MovieType";
+import Image from "next/image";
+import Link from "next/link";
+
+export default async function similar({
+  params: { similarid },
+}: {
+  params: { similarid: string };
+}) {
+  const responseSimilar = await fetch(
+    ` https://api.themoviedb.org/3/movie/${similarid}/similar?language=en-US&page=1`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const dataSimilar = await responseSimilar.json();
+
+  console.log(dataSimilar);
+  function formatVoteAverage(vote: number) {
+    return (Math.floor(vote * 10) / 10).toString().replace(".", ",");
+  }
+  return (
+    <div>
+      <div className="max-w-[1280px] flex m-auto flex-wrap gap-[32px] mb-[32px]">
+        {dataSimilar.results
+          ?.slice(0, 20)
+          .map((movieup: MovieTypeUpcoming, index: number) => {
+            return (
+              <Link href={`/catagory/${movieup.id}`} key={index}>
+                <div
+                  key={index}
+                  className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg  "
+                >
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${movieup?.poster_path}`}
+                    width={229.73}
+                    height={340}
+                    alt=""
+                  />
+                  <div>
+                    <div className="flex">
+                      <img src="star.svg" alt="" />
+                      <p>{formatVoteAverage(movieup.vote_average)}</p>
+                      <p>/10</p>
+                    </div>
+                    <div>
+                      <h2>{movieup.original_title}</h2>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+      </div>
+    </div>
+  );
+}

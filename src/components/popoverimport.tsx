@@ -56,11 +56,8 @@ export default async function PopoverDemo() {
             <div className="flex items-start content-start gap-x-4 gap-y-[var(--spacing-4,16px)] self-stretch flex-wrap ">
               {data.genres?.map((movie: MovieSelectGanre, index: number) => {
                 return (
-                  <Link href={`ganre/${movie.id}`} key={index}>
-                    <div
-                      key={index}
-                      className="w-[577px] bg-black flex p-[var(--spacing-5,20px)] flex-col items-start absolute left-[-50px] top-[18px] "
-                    >
+                  <Link href={`/ganre/${movie.id}`} key={index}>
+                    <div key={index} className=" flex  flex-col items-start  ">
                       <div className=" inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground rounded-full cursor-pointer">
                         <p>{movie.name}</p>
                         <img src="arrow.svg" alt="" />

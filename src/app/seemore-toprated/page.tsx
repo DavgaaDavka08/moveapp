@@ -21,7 +21,7 @@ export default async function page1() {
 
   return (
     <div className="max-w-[1280px] flex m-auto flex-wrap gap-[32px]">
-      {data.results?.slice(0, 10).map((movie: MovieTopRated, index: number) => {
+      {data.results?.slice(0, 20).map((movie: MovieTopRated, index: number) => {
         return (
           <Link href={`/catagory/${movie.id}`} key={index}>
             <div

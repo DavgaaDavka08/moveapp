@@ -11,6 +11,7 @@ export type MovieTypeUpcoming = {
   poster_path: boolean;
   vote_average: number;
   id: number;
+  total_results: number;
 };
 export type MovieTopRated = {
   title: string;
@@ -31,6 +32,7 @@ export type MovieSelectGanre = {
   name: string;
   id: number;
   genres: string;
+  total_results: number;
 };
 export type MovieStar = {
   name: string;

@@ -30,7 +30,7 @@ export default async function CardsUpcoming() {
             <Link href={`/catagory/${movieup.id}`} key={index}>
               <div
                 key={index}
-                className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
+                className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg  "
               >
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${movieup?.poster_path}`}
