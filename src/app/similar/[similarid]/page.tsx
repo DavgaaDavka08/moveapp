@@ -1,3 +1,4 @@
+import { PaginationDemo } from "@/app/_components/Next-Pagnition";
 import { TOKEN } from "@/util/constant";
 import { MovieTypeUpcoming } from "@/util/MovieType";
 import Image from "next/image";
