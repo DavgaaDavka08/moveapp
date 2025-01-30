@@ -10,7 +10,7 @@ import React from "react";
 
 export default function Ganre2() {
   const [movie, setMovie] = React.useState<any>([]);
-  const [genre, setGenre] = React.useState<MovieSelectGanre[]>([]);
+  const [genre, setGenre] = React.useState<{ id: string; name: string }[]>([]);
 
   const searchParams = useSearchParams();
 
@@ -31,7 +31,7 @@ export default function Ganre2() {
       console.log("res", res);
     };
     responce();
-  }, []);
+  }, [genreId]);
   React.useEffect(() => {
     const data = async () => {
       const responsehuuchin = await fetch(
@@ -67,25 +67,34 @@ export default function Ganre2() {
               See lists of movies by genre
             </p>
           </div>
-          {genre?.map((movie: MovieSelectGanre, index: number) => {
-            return (
-              <Link href={`/ganre/${movie.id}`} key={index}>
-                <div key={index}>
-                  <div className="inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground rounded-full cursor-pointer">
-                    <p>{movie.name}</p>
-                    <img src="arrow.svg" alt="" />
-                  </div>
-                  <p>{movie.id}</p>
-                </div>
-              </Link>
-            );
-          })}
+
+          <div className="flex flex-col ">
+            <div className="inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground rounded-full cursor-pointer">
+              <ToggleGroupDemo genres={genre} />
+            </div>
+            <p>{movie.id}</p>
+          </div>
+
           <div className="shrink-0 bg-border w-[3px] h-[700px] border-border border absolute left-[300px] bottom-[1px] "></div>
         </div>
       </div>
       <div>
         <p>{movie?.total_results} titles</p>
-        <ToggleGroupDemo />
+        {movie.map((movie: MovieTypeUpcoming, index: number) => {
+          return (
+            <Link href={`/catagory${movie.id}`} key={index}>
+              <div>
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+                  width={229.73}
+                  height={340}
+                  alt=""
+                />
+                <p>{movie.original_title}</p>
+              </div>
+            </Link>
+          );
+        })}
       </div>
       <PaginationDemo />
     </div>

@@ -159,7 +159,7 @@ export default async function page1({
         </div>
       </div>
       <div>
-        {dataSimilar.results.slice(0, 1).map((movie: MovieSelectGanre) => {
+        {dataSimilar?.results?.slice(0, 1).map((movie: MovieSelectGanre) => {
           return (
             <div className="w-[1280px] h-[36px] flex items-center justify-between m-auto">
               <div>
@@ -179,7 +179,7 @@ export default async function page1({
           ?.slice(0, 5)
           .map((movie: MovieNowPlayng, index: number) => {
             return (
-              <Link href={`/catagory/${movie.id}`}>
+              <Link href={`catagory${movie.id}`}>
                 <div key={index}>
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}

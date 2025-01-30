@@ -11,7 +11,6 @@ export function ToggleGroupDemo({
   const { push } = useRouter();
   const handleClick = (selectedGenreIds: string[]) => {
     push(`/ganre/14?genreIds=${selectedGenreIds}`);
-    console.log(selectedGenreIds);
   };
   return (
     <ToggleGroup type="multiple" onValueChange={handleClick}>
