@@ -6,9 +6,7 @@ export default function Feature() {
   return (
     <div>
       <div className=" w-[100wh]">
-        <div className="">
-          <CarouselDemo />
-        </div>
+        <CarouselDemo />
       </div>
     </div>
   );

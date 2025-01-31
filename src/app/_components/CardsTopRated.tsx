@@ -28,7 +28,7 @@ export default async function CardsTopRated() {
           <Link href={`catagory/${movie.id}`} key={index}>
             <div
               key={index}
-              className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
+              className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-secondary"
             >
               <div className="">
                 <Image
@@ -38,11 +38,13 @@ export default async function CardsTopRated() {
                   alt=""
                 />
                 <div className="flex">
-                  <img src="star.svg" alt="" />
+                  <img src="/star.png" alt="" />
                   <p>{formatVoteAverage(movie.vote_average)}</p>
                   <p>/10</p>
                 </div>
-                <h2>{movie.original_title}</h2>
+                <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
+                  {movie.original_title}
+                </h2>
               </div>
             </div>
           </Link>

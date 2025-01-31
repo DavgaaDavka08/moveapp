@@ -27,10 +27,10 @@ export default async function CardsUpcoming() {
         ?.slice(0, 10)
         .map((movieup: MovieTypeUpcoming, index: number) => {
           return (
-            <Link href={`/catagory/${movieup.id}`} key={index}>
+            <Link href={`catagory/${movieup.id}`} key={index}>
               <div
                 key={index}
-                className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg  "
+                className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-rounded-lg bg-secondary "
               >
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${movieup?.poster_path}`}
@@ -40,12 +40,14 @@ export default async function CardsUpcoming() {
                 />
                 <div>
                   <div className="flex">
-                    <img src="star.svg" alt="" />
+                    <img src="/star.png" alt="" />
                     <p>{formatVoteAverage(movieup.vote_average)}</p>
                     <p>/10</p>
                   </div>
                   <div>
-                    <h2>{movieup.original_title}</h2>
+                    <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
+                      {movieup.original_title}
+                    </h2>
                   </div>
                 </div>
               </div>

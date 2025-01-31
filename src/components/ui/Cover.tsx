@@ -29,7 +29,7 @@ export async function CarouselDemo() {
       .replace(".", ",");
   }
   return (
-    <div className="w-[95%] m-auto relative">
+    <div className="w-[100%] m-auto relative">
       <Carousel>
         <CarouselContent>
           {data.results
@@ -47,14 +47,14 @@ export async function CarouselDemo() {
                           }}
                         ></div>
                         <div className=" absolute left-[140px] bottom-[158px] w-[404px] h-[264px] flex flex-col items-start gap-4">
-                          <p className="text-white font-sans text-[16px] font-normal leading-6">
+                          <p className="text-white font-sans text-[16px] font-normal leading-9">
                             Now Playng:
                           </p>
                           <p className="text-white font-inter text-3xl font-bold leading-[40px] tracking-[-0.9px]">
                             {movie?.original_title}
                           </p>
                           <div className="flex">
-                            <img src="star.svg" alt="" />
+                            <img src="/star.png" alt="" />
                             <p className="text-[#FAFAFA] text-lg font-semibold leading-[28px] font-inter">
                               {formatVoteAverage(movie?.vote_average)}
                             </p>
@@ -63,7 +63,7 @@ export async function CarouselDemo() {
                             </p>
                           </div>
 
-                          <p className="text-[#FAFAFA] font-inter text-xs font-normal leading-4">
+                          <p className="text-[#FAFAFA] font-inter text-xs font-normal leading-6">
                             {movie?.overview}
                           </p>
                         </div>

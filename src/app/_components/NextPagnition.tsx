@@ -1,3 +1,4 @@
+"use client";
 import {
   Pagination,
   PaginationContent,
@@ -7,8 +8,15 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useSearchParams } from "next/navigation";
+// import { useState } from "react";
 
 export function PaginationDemo() {
+  const searchParams = useSearchParams();
+  const genre = searchParams.get("genreIds");
+  const page = searchParams.get("page");
+  const pagethird = searchParams.get("page");
+
   return (
     <Pagination>
       <PaginationContent>
@@ -16,15 +24,28 @@ export function PaginationDemo() {
           <PaginationPrevious href="#" />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
+          <PaginationLink
+            href={"ganre?" + "genreIds=" + genre + "&page=1"}
+            isActive={page == "1"}
+          >
+            1
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#" isActive>
+          <PaginationLink
+            href={"ganre?" + "genreIds=" + genre + "&page=2"}
+            isActive={page == "2"}
+          >
             2
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
+          <PaginationLink
+            href={"ganre?" + "genreIds=" + genre + "&page=3"}
+            isActive={pagethird == "3"}
+          >
+            3
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationEllipsis />

@@ -2,7 +2,7 @@ import { TOKEN } from "@/util/constant";
 import { MovieTypeUpcoming } from "@/util/MovieType";
 import Image from "next/image";
 import Link from "next/link";
-import { PaginationDemo } from "../_components/Next-Pagnition";
+import { PaginationDemo } from "../_components/NextPagnition";
 
 export default async function page1() {
   const response = await fetch(
@@ -38,12 +38,14 @@ export default async function page1() {
                 />
                 <div>
                   <div className="flex">
-                    <img src="star.svg" alt="" />
+                    <img src="/star.png" alt="" />
                     <p>{formatVoteAverage(movieup.vote_average)}</p>
                     <p>/10</p>
                   </div>
                   <div>
-                    <h2>{movieup.original_title}</h2>
+                    <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
+                      {movieup.original_title}
+                    </h2>
                   </div>
                 </div>
               </div>

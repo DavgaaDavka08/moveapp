@@ -5,8 +5,9 @@ import { ToggleGroupDemo } from "../_components/Buttons-Toggle";
 import { MovieSelectGanre, MovieTypeUpcoming } from "@/util/MovieType";
 import Image from "next/image";
 import Link from "next/link";
-import { PaginationDemo } from "../_components/Next-Pagnition";
+import { PaginationDemo } from "../_components/NextPagnition";
 import React from "react";
+import { Star } from "lucide-react";
 
 export default function Ganre2() {
   const [movie, setMovie] = React.useState<any>([]);
@@ -15,10 +16,11 @@ export default function Ganre2() {
   const searchParams = useSearchParams();
 
   const genreId = searchParams.get("genreIds");
+  const page = searchParams.get("page") || 1;
   React.useEffect(() => {
     const responce = async () => {
       const response = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${genreId}&page=${1}`,
+        `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${genreId}&page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${TOKEN}`,
@@ -31,7 +33,8 @@ export default function Ganre2() {
       console.log("res", res);
     };
     responce();
-  }, [genreId]);
+  }, [genreId, page]);
+
   React.useEffect(() => {
     const data = async () => {
       const responsehuuchin = await fetch(
@@ -54,49 +57,50 @@ export default function Ganre2() {
     return (Math.floor(vote * 10) / 10).toString().replace(".", ",");
   }
 
-  // const clickHandler(ganresid:number)=>{
-  //   r
-  // }
   return (
-    <div className=" flex gap-10  ">
-      <div className="space-y-2">
-        <div className=" flex  p-[var(--spacing-5,20px)] flex-col items-start mr-[100px] ml-[10px]">
-          <div className=" relative w-[277px] flex items-start content-start gap-x-4 gap-y-[var(--spacing-4,16px)] self-stretch flex-wrap ">
-            <h4 className="text-[24px] font-semibold leading-[32px]">Genres</h4>
-            <p className="text-[16px] font-normal leading-[24px] text-base">
-              See lists of movies by genre
-            </p>
-          </div>
+    <div className="w-[1280px] flex m-auto ">
+      {/* <h4 className="text-[24px] font-semibold leading-[32px]">Genres</h4>
+      <p className="text-[16px] font-normal leading-[24px] text-base">
+        See lists of movies by genre
+      </p> */}
+      <div className="w-[400px] flex flex-wrap ">
+        <ToggleGroupDemo genres={genre} />
+      </div>
 
-          <div className="flex flex-col ">
-            <div className="inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground rounded-full cursor-pointer">
-              <ToggleGroupDemo genres={genre} />
-            </div>
-            <p>{movie.id}</p>
-          </div>
+      <p>{movie.id}</p>
 
-          <div className="shrink-0 bg-border w-[3px] h-[700px] border-border border absolute left-[300px] bottom-[1px] "></div>
+      {/* <div className="shrink-0 bg-border w-[3px] h-[700px] border-border border absolute left-[300px] bottom-[1px] "></div> */}
+
+      <div>
+        <p>{movie?.total_results} titles</p>
+        <div className="w-[880px] flex flex-wrap">
+          {movie.map((movie: MovieTypeUpcoming, index: number) => {
+            return (
+              <Link href={`/catagory/${movie.id}`} key={index}>
+                <div key={index} className="">
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+                    width={229.73}
+                    height={340}
+                    alt=""
+                  />
+                  {/* <div className="flex">
+                  <Star />
+                  <p>{formatVoteAverage(movie.vote_average)}</p>
+                  <p>/10</p>
+                </div> */}
+                  {/* <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
+                  {movie.original_title}
+                </h2> */}
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
       <div>
-        <p>{movie?.total_results} titles</p>
-        {movie.map((movie: MovieTypeUpcoming, index: number) => {
-          return (
-            <Link href={`/catagory${movie.id}`} key={index}>
-              <div>
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
-                  width={229.73}
-                  height={340}
-                  alt=""
-                />
-                <p>{movie.original_title}</p>
-              </div>
-            </Link>
-          );
-        })}
+        <PaginationDemo />
       </div>
-      <PaginationDemo />
     </div>
   );
 }

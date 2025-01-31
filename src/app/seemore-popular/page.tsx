@@ -35,12 +35,14 @@ export default async function page2() {
                   alt=""
                 />
                 <div className="flex">
-                  <img src="star.svg" alt="" />
+                  <img src="/star.png" alt="" />
 
                   <p>{formatVoteAverage(movie.vote_average)}</p>
                   <p>/10</p>
                 </div>
-                <h2>{movie.original_title}</h2>
+                <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
+                  {movie.original_title}
+                </h2>
               </div>
             </div>
           </Link>

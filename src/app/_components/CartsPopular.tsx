@@ -27,7 +27,7 @@ export default async function CartsPopular() {
           <Link href={`catagory/${movie.id}`} key={index}>
             <div
               key={index}
-              className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
+              className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-secondary "
             >
               <div className="">
                 <Image
@@ -37,7 +37,7 @@ export default async function CartsPopular() {
                   alt=""
                 />
                 <div className="flex">
-                  <img src="star.svg" alt="" />
+                  <img src="/star.png" alt="" />
 
                   <p>{formatVoteAverage(movie.vote_average)}</p>
                   <p>/10</p>

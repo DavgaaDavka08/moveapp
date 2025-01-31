@@ -47,7 +47,7 @@ const SearchInput = () => {
           {searchResults?.slice(0, 5).map((movie: MovieTopRated) => (
             <div className="flex flex-col gap-3">
               <Link href={`/catagory/${movie?.id}`}>
-                <div className="flex gap-4 w-full h-[110px] p-2 items-center hover:bg-[#f5f5f5] rounded-lg overflow-hidden">
+                <div className="flex gap-4 w-full h-[110px] p-2 items-center  rounded-lg overflow-hidden">
                   <Image
                     src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
                     width={67}
@@ -56,7 +56,7 @@ const SearchInput = () => {
                     className="rounded-lg"
                   />
                   <div className="w-full">
-                    <h2 className="font-bold text-[20px]">
+                    <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
                       {movie?.original_title}
                     </h2>
                     <div className="flex items-center">

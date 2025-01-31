@@ -1,4 +1,4 @@
-import { PaginationDemo } from "@/app/_components/Next-Pagnition";
+import { PaginationDemo } from "@/app/_components/NextPagnition";
 import { TOKEN } from "@/util/constant";
 import { MovieTypeUpcoming } from "@/util/MovieType";
 import Image from "next/image";
@@ -31,11 +31,8 @@ export default async function similar({
           ?.slice(0, 20)
           .map((movieup: MovieTypeUpcoming, index: number) => {
             return (
-              <Link href={`/catagory/${movieup.id}`} key={index}>
-                <div
-                  key={index}
-                  className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg  "
-                >
+              <Link key={index} href={`/catagory/${movieup.id}`}>
+                <div className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg  ">
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${movieup?.poster_path}`}
                     width={229.73}
@@ -49,7 +46,9 @@ export default async function similar({
                       <p>/10</p>
                     </div>
                     <div>
-                      <h2>{movieup.original_title}</h2>
+                      <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
+                        {movieup.original_title}
+                      </h2>
                     </div>
                   </div>
                 </div>
