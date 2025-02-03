@@ -16,7 +16,7 @@ export function PaginationDemo() {
   const genre = searchParams.get("genreIds");
   const page = searchParams.get("page");
   const pagethird = searchParams.get("page");
-
+  //  const= Addhandler
   return (
     <Pagination>
       <PaginationContent>
@@ -25,6 +25,7 @@ export function PaginationDemo() {
         </PaginationItem>
         <PaginationItem>
           <PaginationLink
+            // onClick={Addhandler}
             href={"ganre?" + "genreIds=" + genre + "&page=1"}
             isActive={page == "1"}
           >

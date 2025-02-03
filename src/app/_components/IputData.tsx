@@ -78,11 +78,12 @@ const SearchInput = () => {
                   </div>
                 </div>
               </Link>
-
               <hr className="border-b-2" />
             </div>
           ))}
-          <div>See all results for "{searchValue}"</div>
+          <Link href={`/search?search?value=${searchValue}`}>
+            <div>See all results for "{searchValue}"</div>
+          </Link>
         </div>
       ) : searchValue.length > 1 && searchResults.length == 0 ? (
         <div className="absolute mt-4 z-10 bg-white p-8">

@@ -2,7 +2,11 @@
 import { TOKEN } from "@/util/constant";
 import { useSearchParams } from "next/navigation";
 import { ToggleGroupDemo } from "../_components/Buttons-Toggle";
-import { MovieSelectGanre, MovieTypeUpcoming } from "@/util/MovieType";
+import {
+  MovieSelectGanre,
+  MovieTopRated,
+  MovieTypeUpcoming,
+} from "@/util/MovieType";
 import Image from "next/image";
 import Link from "next/link";
 import { PaginationDemo } from "../_components/NextPagnition";
@@ -58,49 +62,58 @@ export default function Ganre2() {
   }
 
   return (
-    <div className="w-[1280px] flex m-auto ">
-      {/* <h4 className="text-[24px] font-semibold leading-[32px]">Genres</h4>
-      <p className="text-[16px] font-normal leading-[24px] text-base">
-        See lists of movies by genre
-      </p> */}
-      <div className="w-[400px] flex flex-wrap ">
-        <ToggleGroupDemo genres={genre} />
+    <div className="w-[1420px] flex m-auto h-[2400px] relative gap-3 ">
+      <div className="shrink-0 bg-border w-[3px] h-[1000px] border-border border absolute left-[300px] bottom-[500px] "></div>
+      <div className="h-[600px] flex flex-col gap-[30px] mt-[130px]">
+        <div>
+          <h1 className="mb-8 text-2xl font-semibold text-foreground lg:text-3xl">
+            Search Filter
+          </h1>
+          <p className="text-2xl font-semibold">Genres</p>
+          <h2 className="text-base">See lists of movies by genre</h2>
+        </div>
+        <div className="w-[400px] flex flex-wrap ">
+          <ToggleGroupDemo genres={genre} />
+        </div>
       </div>
 
       <p>{movie.id}</p>
-
-      {/* <div className="shrink-0 bg-border w-[3px] h-[700px] border-border border absolute left-[300px] bottom-[1px] "></div> */}
-
       <div>
-        <p>{movie?.total_results} titles</p>
-        <div className="w-[880px] flex flex-wrap">
-          {movie.map((movie: MovieTypeUpcoming, index: number) => {
+        <p>{movie?.vote_count} titles</p>
+
+        <div className="max-w-[1300px] flex m-auto flex-wrap gap-[20px] ">
+          {movie?.slice(0, 20).map((movie: MovieTopRated, index: number) => {
             return (
-              <Link href={`/catagory/${movie.id}`} key={index}>
-                <div key={index} className="">
-                  <Image
-                    src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
-                    width={229.73}
-                    height={340}
-                    alt=""
-                  />
-                  {/* <div className="flex">
-                  <Star />
-                  <p>{formatVoteAverage(movie.vote_average)}</p>
-                  <p>/10</p>
-                </div> */}
-                  {/* <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
-                  {movie.original_title}
-                </h2> */}
+              <Link href={`catagory/${movie.id}`} key={index}>
+                <div
+                  key={index}
+                  className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-secondary mt-[100px]"
+                >
+                  <div className="">
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+                      width={229.73}
+                      height={340}
+                      alt=""
+                    />
+                    <div className="flex">
+                      <img src="/star.png" alt="" />
+                      <p>{formatVoteAverage(movie.vote_average)}</p>
+                      <p>/10</p>
+                    </div>
+                    <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
+                      {movie.original_title}
+                    </h2>
+                  </div>
                 </div>
               </Link>
             );
           })}
         </div>
       </div>
-      <div>
+      {/* <div>
         <PaginationDemo />
-      </div>
+      </div> */}
     </div>
   );
 }
