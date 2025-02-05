@@ -1,26 +1,28 @@
 "use client";
 import { TOKEN } from "@/util/constant";
 import { useSearchParams } from "next/navigation";
-import { ToggleGroupDemo } from "../_components/Buttons-Toggle";
+
 import { MovieSelectGanre, MovieTypeUpcoming } from "@/util/MovieType";
 import Image from "next/image";
 import Link from "next/link";
 import { PaginationDemo } from "../_components/NextPagnition";
 import React from "react";
 import { Star } from "lucide-react";
+import { ToggleGroupDemos } from "../_components/ToggleTwo";
 
 export default function Search2() {
   const [movie, setMovie] = React.useState<any>([]);
-  const [genre, setGenre] = React.useState<{ id: string; name: string }[]>([]);
+  const [genre, setGenre] = React.useState<MovieSelectGanre[]>([]);
 
   const searchParams = useSearchParams();
 
   const genreId = searchParams.get("genreIds");
   const page = searchParams.get("page") || 1;
+  const searchValue = searchParams.get("value");
   React.useEffect(() => {
     const responce = async () => {
       const response = await fetch(
-        `https://api.themoviedb.org/3 /search/movie?query=${genreId}&language=en-US&page=${page}`,
+        `https://api.themoviedb.org/3/search/movie?query=${searchValue}&with_genres=${genreId}&language=en-US&page=${genreId}`,
         {
           headers: {
             Authorization: `Bearer ${TOKEN}`,
@@ -33,7 +35,7 @@ export default function Search2() {
       console.log("res", res);
     };
     responce();
-  }, [genreId, page]);
+  }, [searchValue, page]);
 
   React.useEffect(() => {
     const data = async () => {
@@ -64,7 +66,7 @@ export default function Search2() {
         See lists of movies by genre
       </p> */}
       <div className="w-[400px] flex flex-wrap ">
-        <ToggleGroupDemo genres={genre} />
+        <ToggleGroupDemos genre={genre} />
       </div>
 
       <p>{movie.id}</p>

@@ -26,7 +26,7 @@ export default async function page1() {
           <Link href={`/catagory/${movie.id}`} key={index}>
             <div
               key={index}
-              className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-gray-800 "
+              className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-secondary "
             >
               <div className="">
                 <Image

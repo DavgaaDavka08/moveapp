@@ -84,7 +84,7 @@ export default function Ganre2() {
         <div className="max-w-[1300px] flex m-auto flex-wrap gap-[20px] ">
           {movie?.slice(0, 20).map((movie: MovieTopRated, index: number) => {
             return (
-              <Link href={`catagory/${movie.id}`} key={index}>
+              <Link href={`/catagory/${movie.id}`} key={index}>
                 <div
                   key={index}
                   className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-secondary mt-[100px]"
@@ -110,10 +110,10 @@ export default function Ganre2() {
             );
           })}
         </div>
+        <div>
+          <PaginationDemo />
+        </div>
       </div>
-      {/* <div>
-        <PaginationDemo />
-      </div> */}
     </div>
   );
 }
