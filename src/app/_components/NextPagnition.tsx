@@ -8,53 +8,82 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useSearchParams } from "next/navigation";
-// import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export function PaginationDemo() {
+export const Paginat = ({
+  currentPage,
+  totalPages,
+}: {
+  currentPage: number;
+  totalPages: number;
+}) => {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const genre = searchParams.get("genreIds");
-  const page = searchParams.get("page");
-  const pagethird = searchParams.get("page");
-  //  const= Addhandler
+  const value = searchParams.get("searchvalue");
+
+  const goToPage = (pagenum: number) => {
+    router.push(`?${value ? "searchvalue=" + value + "&" : ""}page=${pagenum}`);
+  };
+
   return (
-    <Pagination>
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious href="#" />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            // onClick={Addhandler}
-            href={"ganre?" + "genreIds=" + genre + "&page=1"}
-            isActive={page == "1"}
-          >
-            1
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            href={"ganre?" + "genreIds=" + genre + "&page=2"}
-            isActive={page == "2"}
-          >
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            href={"ganre?" + "genreIds=" + genre + "&page=3"}
-            isActive={pagethird == "3"}
-          >
-            3
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href="#" />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+    <div className="mt-[32px]">
+      <Pagination>
+        <PaginationContent>
+          {currentPage > 1 && (
+            <PaginationItem>
+              <PaginationPrevious
+                href="#"
+                onClick={() => goToPage(currentPage - 1)}
+              />
+            </PaginationItem>
+          )}
+
+          {currentPage > 1 && (
+            <PaginationItem>
+              <PaginationLink
+                href="#"
+                onClick={() => goToPage(currentPage - 1)}
+              >
+                {currentPage - 1}
+              </PaginationLink>
+            </PaginationItem>
+          )}
+          <PaginationItem>
+            <PaginationLink href="#" isActive>
+              {currentPage}
+            </PaginationLink>
+          </PaginationItem>
+          {currentPage < totalPages && (
+            <PaginationItem>
+              <PaginationLink
+                href="#"
+                onClick={() => goToPage(currentPage + 1)}
+              >
+                {currentPage + 1}
+              </PaginationLink>
+            </PaginationItem>
+          )}
+          {currentPage == 1 && (
+            <PaginationItem>
+              <PaginationLink
+                href="#"
+                onClick={() => goToPage(currentPage + 2)}
+              >
+                {currentPage + 2}
+              </PaginationLink>
+            </PaginationItem>
+          )}
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext
+              href="#"
+              onClick={() => goToPage(currentPage + 1)}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </div>
   );
-}
+};

@@ -12,6 +12,7 @@ export type MovieTypeUpcoming = {
   vote_average: number;
   id: number;
   total_results: number;
+  total_pages: number;
 };
 export type MovieTopRated = {
   title: string;

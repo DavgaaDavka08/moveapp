@@ -68,7 +68,6 @@ export async function CarouselDemo() {
                           </p>
                         </div>
                       </div>
-
                       <Card>
                         <CardContent className="flex aspect-square items-center justify-center p-6">
                           <span className="text-4xl font-semibold">
@@ -82,7 +81,6 @@ export async function CarouselDemo() {
               );
             })}
         </CarouselContent>
-
         <CarouselPrevious className="absolute left-[30px] " />
         <CarouselNext className="absolute right-[30px]" />
       </Carousel>

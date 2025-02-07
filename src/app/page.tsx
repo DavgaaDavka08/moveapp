@@ -3,7 +3,6 @@ import CartsPopular from "./_components/CartsPopular";
 import CardsUpcoming from "./_components/CardsUpcoming";
 
 import Feature from "./_components/Feature";
-import { Footer } from "./_components/Footer";
 
 import CardsTopRated from "./_components/CardsTopRated";
 export default async function Home() {
@@ -13,7 +12,6 @@ export default async function Home() {
       <CardsUpcoming />
       <CartsPopular />
       <CardsTopRated />
-      <Footer />
     </div>
   );
 }

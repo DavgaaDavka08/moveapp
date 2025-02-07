@@ -9,13 +9,14 @@ import {
 } from "@/util/MovieType";
 import Image from "next/image";
 import Link from "next/link";
-import { PaginationDemo } from "../_components/NextPagnition";
-import React from "react";
+import { Paginat } from "../_components/NextPagnition";
+import React, { useState } from "react";
 import { Star } from "lucide-react";
 
 export default function Ganre2() {
   const [movie, setMovie] = React.useState<any>([]);
   const [genre, setGenre] = React.useState<{ id: string; name: string }[]>([]);
+  const [datas, setDatas] = useState<MovieTypeUpcoming | null>(null);
 
   const searchParams = useSearchParams();
 
@@ -33,6 +34,7 @@ export default function Ganre2() {
         }
       );
       const res = await response.json();
+      setDatas(res);
       setMovie(res.results || []);
       console.log("res", res);
     };
@@ -51,6 +53,7 @@ export default function Ganre2() {
         }
       );
       const res = await responsehuuchin.json();
+
       setGenre(res.genres || []);
       console.log(res);
     };
@@ -62,56 +65,55 @@ export default function Ganre2() {
   }
 
   return (
-    <div className="w-[1420px] flex m-auto h-[2400px] relative gap-3 ">
-      <div className="shrink-0 bg-border w-[3px] h-[1000px] border-border border absolute left-[300px] bottom-[500px] "></div>
-      <div className="h-[600px] flex flex-col gap-[30px] mt-[130px]">
-        <div>
-          <h1 className="mb-8 text-2xl font-semibold text-foreground lg:text-3xl">
+    <div className="w-[1420px] flex m-auto relative  ">
+      <div className="shrink-0 bg-border w-[3px] h-[1420px] border-border border absolute left-[480px] bottom-[390px] "></div>
+      <div className="h-[400px] flex flex-col gap-[10px] mt-[50px] ml-[50px]">
+        <div className="ml-[10px]">
+          <h1 className="text-2xl font-semibold text-foreground lg:text-3xl">
             Search Filter
           </h1>
           <p className="text-2xl font-semibold">Genres</p>
           <h2 className="text-base">See lists of movies by genre</h2>
         </div>
-        <div className="w-[400px] flex flex-wrap ">
+
+        <div className="w-[387px]  h-[352px] flex flex-wrap ">
           <ToggleGroupDemo genres={genre} />
         </div>
       </div>
 
-      <p>{movie.id}</p>
       <div>
-        <p>{movie?.vote_count} titles</p>
-
-        <div className="max-w-[1300px] flex m-auto flex-wrap gap-[20px] ">
+        <div className=" mt-[100px] ml-[100px] flex flex-wrap gap-5 lg:gap-x-12 lg:gap-y-6">
           {movie?.slice(0, 20).map((movie: MovieTopRated, index: number) => {
             return (
               <Link href={`/catagory/${movie.id}`} key={index}>
                 <div
                   key={index}
-                  className="w-[230px] h-[439px] flex flex-col p-2 items-start rounded-lg bg-secondary mt-[100px]"
+                  className="w-[165px] rounded-sm h-[331px] flex flex-col p-2 items-start rounded-rounded-lg bg-secondary"
                 >
-                  <div className="">
-                    <Image
-                      src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
-                      width={229.73}
-                      height={340}
-                      alt=""
-                    />
-                    <div className="flex">
-                      <img src="/star.png" alt="" />
-                      <p>{formatVoteAverage(movie.vote_average)}</p>
-                      <p>/10</p>
-                    </div>
-                    <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
-                      {movie.original_title}
-                    </h2>
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+                    width={165}
+                    height={244}
+                    alt=""
+                  />
+                  <div className="flex">
+                    <img src="/star.png" alt="" />
+                    <p>{formatVoteAverage(movie.vote_average)}</p>
+                    <p>/10</p>
                   </div>
+                  <h2 className="text-ellipsis  font-inter text-lg font-normal leading-7">
+                    {movie.original_title}
+                  </h2>
                 </div>
               </Link>
             );
           })}
         </div>
         <div>
-          <PaginationDemo />
+          <Paginat
+            currentPage={Number(page)}
+            totalPages={datas?.total_pages || 0}
+          />
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ export function ToggleGroupDemo({
           {genres?.map((genre) => {
             return (
               <ToggleGroupItem key={genre.id} value={genre.id.toString()}>
-                <p className="inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground rounded-full cursor-pointer">
+                <p className=" inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold transition-colors  text-foreground rounded-full cursor-pointer">
                   {genre.name}
                   <img src="/arrow.png" alt="" />
                 </p>

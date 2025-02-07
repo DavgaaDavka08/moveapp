@@ -58,9 +58,9 @@ export default async function PopoverDemo() {
                 return (
                   <Link href={`/ganre/14?genreIds=${movie.id}`} key={index}>
                     <div key={index} className=" flex  flex-col items-start  ">
-                      <div className=" inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground rounded-full cursor-pointer">
+                      <div className=" inline-flex items-center border px-2.5 py-0.5 bg-secondary  text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground rounded-full cursor-pointer">
                         <p>{movie.name}</p>
-                        <img src="arrow.svg" alt="" />
+                        <img className="bg-secondary" src="/arrow.png" alt="" />
                       </div>
                     </div>
                   </Link>

@@ -38,7 +38,7 @@ export default async function CardsTopRated() {
                   alt=""
                 />
                 <div className="flex">
-                  <img src="/star.png" alt="" />
+                  <img className="bg-secondary" src="/star.png" alt="" />
                   <p>{formatVoteAverage(movie.vote_average)}</p>
                   <p>/10</p>
                 </div>

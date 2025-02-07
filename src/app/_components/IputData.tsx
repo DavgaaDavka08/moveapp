@@ -28,9 +28,13 @@ const SearchInput = () => {
 
     setSearchResults(searchData.results || []);
   };
+  const clickHandler = () => {
+    setSearchResults([]);
+    setSearchValue("");
+  };
   return (
     <div className="relative w-[355px]">
-      <div className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground">
+      <div className="absolute left-2.5 top-2.5 h-4 w-4 ">
         <SearchIcon className="h-4 w-4" />
       </div>
       <Input
@@ -39,12 +43,12 @@ const SearchInput = () => {
         placeholder="Search..."
         value={searchValue}
         onChange={searchHandler}
-        className="w-full rounded-lg bg-background pl-8"
+        className="w-full rounded-lg bg-secondary pl-8"
       />
 
       {searchResults.length > 0 ? (
-        <div className="absolute mt-4 z-10 bg-white p-8 flex flex-col gap-[10px] w-[553px] ">
-          {searchResults?.slice(0, 5).map((movie: MovieTopRated) => (
+        <div className="absolute mt-4 z-10 bg-secondary p-8 flex flex-col gap-[10px] w-[553px] ">
+          {searchResults?.slice(0, 4).map((movie: MovieTopRated) => (
             <div key={movie.id} className="flex flex-col gap-3">
               <Link href={`/catagory/${movie?.id}`}>
                 <div className="flex gap-4 w-full h-[110px] p-2 items-center  rounded-lg overflow-hidden">
@@ -81,7 +85,11 @@ const SearchInput = () => {
               <hr className="border-b-2" />
             </div>
           ))}
-          <Link href={`/search?value=${searchValue}`}>
+
+          <Link
+            href={`/search?value=${searchValue}`}
+            onClick={() => clickHandler()}
+          >
             <div>See all results for "{searchValue}"</div>
           </Link>
         </div>
