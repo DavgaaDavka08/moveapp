@@ -24,16 +24,18 @@ export default function Search2() {
   const genreId = searchParams.get("genreIds");
   const page = searchParams.get("page") || 1;
   const searchValue = searchParams.get("value");
+  const fetchOption = {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+      "Content-Type": "application/json",
+    },
+  };
   React.useEffect(() => {
     const responce = async () => {
+      console.log("valuesdasasdas", searchValue);
       const response = await fetch(
         `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=${page}`,
-        {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-            "Content-Type": "application/json",
-          },
-        }
+        fetchOption
       );
       const res = await response.json();
       setData(res);
@@ -41,18 +43,13 @@ export default function Search2() {
       console.log("res", res);
     };
     responce();
-  }, [searchValue, page]);
+  }, [searchValue, page, genreId]);
 
   React.useEffect(() => {
     const data = async () => {
       const responsehuuchin = await fetch(
         "https://api.themoviedb.org/3/genre/movie/list?language=en",
-        {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-            "Content-Type": "application/json",
-          },
-        }
+        fetchOption
       );
       const res = await responsehuuchin.json();
       setGenre(res.genres || []);
@@ -68,31 +65,34 @@ export default function Search2() {
   return (
     <div className="w-[1280px] flex m-auto ">
       <div className="flex flex-wrap gap-5 lg:gap-x-12 lg:gap-y-8 w-[859px] h-[1976px]">
-        {movie?.slice(0, 20).map((movie: MovieTopRated, index: number) => {
-          return (
-            <Link href={`/catagory/${movie.id}`} key={index}>
-              <div
-                key={index}
-                className="w-[165px] rounded-sm h-[331px] flex flex-col p-2 items-start rounded-rounded-lg bg-secondary"
-              >
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
-                  width={165}
-                  height={244}
-                  alt=""
-                />
-                <div className="flex p-2">
-                  <img src="/star.png" alt="" />
-                  <p>{formatVoteAverage(movie.vote_average)}</p>
-                  <p>/10</p>
+        {movie
+          ?.slice(0, 20)
+          ?.filter((genre_ids: number) => genre_ids == 80)
+          .map((movie: MovieTopRated, index: number) => {
+            return (
+              <Link href={`/catagory/${movie.id}`} key={index}>
+                <div
+                  key={index}
+                  className="w-[165px] rounded-sm h-[331px] flex flex-col p-2 items-start rounded-rounded-lg bg-secondary"
+                >
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+                    width={165}
+                    height={244}
+                    alt=""
+                  />
+                  <div className="flex p-2">
+                    <img src="/star.png" alt="" />
+                    <p>{formatVoteAverage(movie.vote_average)}</p>
+                    <p>/10</p>
+                  </div>
+                  <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
+                    {movie.original_title}
+                  </h2>
                 </div>
-                <h2 className="overflow-hidden text-ellipsis  font-inter text-lg font-normal leading-7">
-                  {movie.original_title}
-                </h2>
-              </div>
-            </Link>
-          );
-        })}
+              </Link>
+            );
+          })}
         <div>
           <Paginat
             currentPage={Number(page)}

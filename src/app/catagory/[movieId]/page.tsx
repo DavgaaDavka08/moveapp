@@ -13,48 +13,27 @@ export default async function page1({
 }: {
   params: { movieId: string };
 }) {
-  const responseTrailer = await fetch(
-    ` https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const baseUrl = `https://api.themoviedb.org/3/movie/${movieId}`;
+  const fetchOption = {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+      "Content-Type": "application/json",
+    },
+  };
+  const responseTrailer = await fetch(`${baseUrl}/videos?language=en-US`);
+  const response = await fetch(`${baseUrl}?language=en-US`, fetchOption);
   const responseStar = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
+    `${baseUrl}/credits?language=en-US`,
+    fetchOption
   );
   ///
   const responseSimilar = await fetch(
-    ` https://api.themoviedb.org/3/movie/${movieId}/similar?language=en-US&page=1`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
+    `${baseUrl}/similar?language=en-US&page=1`,
+    fetchOption
   );
   const dataSimilar = await responseSimilar.json();
-
   console.log(dataSimilar);
   const dataTrailer = await responseTrailer.json();
-
   console.log(dataTrailer);
   const data = await response.json();
   console.log(data);

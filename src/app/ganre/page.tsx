@@ -22,21 +22,22 @@ export default function Ganre2() {
 
   const genreId = searchParams.get("genreIds");
   const page = searchParams.get("page") || 1;
+  const fetchOption = {
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+      "Content-Type": "application/json",
+    },
+  };
   React.useEffect(() => {
     const responce = async () => {
       const response = await fetch(
         `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${genreId}&page=${page}`,
-        {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-            "Content-Type": "application/json",
-          },
-        }
+        fetchOption
       );
       const res = await response.json();
       setDatas(res);
       setMovie(res.results || []);
-      console.log("res", res);
+      console.log("yag res", res);
     };
     responce();
   }, [genreId, page]);
@@ -45,12 +46,7 @@ export default function Ganre2() {
     const data = async () => {
       const responsehuuchin = await fetch(
         " https://api.themoviedb.org/3/genre/movie/list?language=en",
-        {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-            "Content-Type": "application/json",
-          },
-        }
+        fetchOption
       );
       const res = await responsehuuchin.json();
 

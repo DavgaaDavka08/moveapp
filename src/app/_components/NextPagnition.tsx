@@ -19,10 +19,10 @@ export const Paginat = ({
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const value = searchParams.get("searchvalue");
+  const value = searchParams.get("value");
 
   const goToPage = (pagenum: number) => {
-    router.push(`?${value ? "searchvalue=" + value + "&" : ""}page=${pagenum}`);
+    router.push(`?${value ? "value=" + value + "&" : ""}page=${pagenum}`);
   };
 
   return (
@@ -56,7 +56,7 @@ export const Paginat = ({
           {currentPage < totalPages && (
             <PaginationItem>
               <PaginationLink
-                href="#"
+                // href={`?page=${currentPage + 1}`}
                 onClick={() => goToPage(currentPage + 1)}
               >
                 {currentPage + 1}
@@ -66,7 +66,7 @@ export const Paginat = ({
           {currentPage == 1 && (
             <PaginationItem>
               <PaginationLink
-                href="#"
+                // href={`&page=${currentPage + 2}`}
                 onClick={() => goToPage(currentPage + 2)}
               >
                 {currentPage + 2}

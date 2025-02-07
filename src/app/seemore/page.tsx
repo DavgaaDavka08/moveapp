@@ -2,7 +2,6 @@ import { TOKEN } from "@/util/constant";
 import { MovieTypeUpcoming } from "@/util/MovieType";
 import Image from "next/image";
 import Link from "next/link";
-import { PaginationDemo } from "../_components/NextPagnition";
 
 export default async function page1() {
   const response = await fetch(
@@ -52,7 +51,7 @@ export default async function page1() {
             </Link>
           );
         })}
-      <PaginationDemo />
+      {/* <PaginationDemo /> */}
     </div>
   );
 }
